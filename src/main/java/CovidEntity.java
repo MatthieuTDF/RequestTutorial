@@ -1,8 +1,28 @@
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.IOException;
 import java.io.Serializable;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class CovidEntity implements Serializable {
+
+    public CovidEntity deepClone() {
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        // Exemple de désérialisation
+        CovidEntity myNewEntity = new CovidEntity();
+
+        try {
+            String deserializedEntity = objectMapper.writeValueAsString(this);
+            myNewEntity = objectMapper.readValue(deserializedEntity, CovidEntity.class);
+        } catch (IOException e) {
+            System.out.println("ERROR in cloning object");
+        }
+
+        return myNewEntity;
+    }
+
     @Override
     public String toString() {
         return "CovidEntity{" +

@@ -35,6 +35,14 @@ public class Main {
 
             System.out.println(deserializedEntity);
 
+            // Création d'une copie profonde de entity
+            CovidEntity mySecondEntity = objectMapper.readValue(deserializedEntity, CovidEntity.class);
+
+            // utilisation de la méthode de deep clone pour créer une autre copie profonde
+            CovidEntity myThirdEntity = mySecondEntity.deepClone();
+
+            System.out.println(myThirdEntity.toString());
+
         } catch (IOException e) {
             e.printStackTrace();
         }
